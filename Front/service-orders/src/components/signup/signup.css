@@ -1,0 +1,66 @@
+/* ===== CSS do Formulário de Login ===== */
+.container-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; 
+    min-height: 400px;
+    margin: 130px auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0.98;
+  }
+  
+  h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .caixa {
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: border 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .caixa:focus {
+    border-color: #1b4777;
+    outline: none;
+    background-color: #eaf7ff;
+  }
+  
+  @media (max-width: 400px) {
+    .container-login {
+      padding: 20px;
+      margin-top: 60px;
+      margin-bottom: 60px;
+      max-width: 90%;
+    }
+  
+    h1 {
+      font-size: 2em;
+    }
+  
+    .caixa {
+      padding: 10px;
+      font-size: 14px;
+    }
+  
+    .btn {
+      font-size: 14px;
+    }
+  }
+  

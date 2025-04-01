@@ -1,0 +1,78 @@
+/* Header Styling */
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box; /* Garante que o padding não sobreponha o conteúdo */
+}
+
+.header:hover {
+  background-color: #f4f4f4;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: flex-start;  /* Alinha os links da esquerda */
+  align-items: center;
+}
+
+.nav a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+/* Responsividade para evitar o corte do último link */
+@media screen and (max-width: 767px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem 1rem;
+    gap: 1rem;  /* Adiciona espaçamento entre logo e nav */
+  }
+
+  .nav {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .nav a {
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    text-align: left;
+    box-sizing: border-box;  /* Garante que o conteúdo dos links não ultrapasse a largura */
+  }
+}
