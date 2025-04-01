@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./historico.css";
-import { FaEdit, FaTrash, FaPlus, FaSearch } from 'react-icons/fa';
+import "./historicos.css";
+//import { FaEdit, FaTrash, FaPlus, FaSearch } from 'react-icons/fa';
 import ModalHistorico from "../modalHistorico/modalHistorico";
 
 export default function Historico() {
@@ -99,7 +99,7 @@ export default function Historico() {
             sethistoricoSelecionado(null);
           }}
         >
-          <FaPlus />
+          {/* <FaPlus /> */}
         </button>
         <input
           type="text"
@@ -107,7 +107,7 @@ export default function Historico() {
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
         />
-        <FaSearch />
+        {/* <FaSearch /> */}
       <div className="historico-list">
         <div className="table-header">
             <div className="col-header">Ordem</div>
@@ -127,13 +127,13 @@ export default function Historico() {
                   sethistoricoSelecionado(historico);
                 }}
               >
-                <FaEdit />
+                {/* <FaEdit /> */}
               </button>
               <button
                 className="btn delete"
                 onClick={() => apagar(historico.id)}
               >
-                <FaTrash />
+              {/*  <FaTrash /> */}
               </button>
             </div>
           ))

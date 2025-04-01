@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./modalCursos.css";
+import "./modalHistorico.css";
 
 const ModalHistorico = ({
   isOpen,
@@ -10,7 +10,7 @@ const ModalHistorico = ({
 }) => {
   if (!isOpen) return null;
 
-  console.log("Curso Selecionado: ", historicoSelecionado);
+  console.log("Historico Selecionado: ", historicoSelecionado);
 
   const [id, setId] = useState(historicoSelecionado?.id || "");
   const [ordem, setOrdem] = useState(historicoSelecionado?.ordem || "");
@@ -40,44 +40,31 @@ const ModalHistorico = ({
       criar(novoHistorico);
     }
   };
-//parei aqui 
   return (
     <div className="modal-overlay">
       <div className="modal_container">
         <button className="close_button" onClick={onClose}>X</button>
-        <h2>{historicoSelecionado ? "Editar cursos" : "Cadastrar cursos"}</h2>
+        <h2>{historicoSelecionado ? "Editar historicos" : "Cadastrar historicos"}</h2>
         <div className="body_modal">
           <div className="caixa1">
             <form onSubmit={handleSubmit}>
               <input
                 className="codigo_modal"
-                value={codigo}
-                onChange={(e) => setCodigo(e.target.value)}
-                placeholder="codigo"
+                value={ordem}
+                onChange={(e) => setOrdem(e.target.value)}
+                placeholder="ordem"
               />
               <input
                 className="curso_modal"
-                value={curso}
-                onChange={(e) => setCurso(e.target.value)}
-                placeholder="curso"
+                value={data_encerramento}
+                onChange={(e) => setData_encerramento(e.target.value)}
+                placeholder="data encerramento"
               />
               <input
                 className="tipo_modal"
-                value={tipo}
-                onChange={(e) => setTipo(e.target.value)}
-                placeholder="Tipo"
-              />
-              <input
-                className="ha_modal"
-                value={ha}
-                onChange={(e) => setHa(e.target.value)}
-                placeholder="Horas/Aula"
-              />
-              <input
-                className="sigla_modal"
-                value={sigla}
-                onChange={(e) => setSigla(e.target.value)}
-                placeholder="Sigla"
+                value={descricao_manutencao}
+                onChange={(e) => setDescricao_manutencao(e.target.value)}
+                placeholder="Descrição de manutenção"
               />
               <button type="submit">
                 {historicoSelecionado ? "Atualizar" : "Salvar"}
