@@ -1,0 +1,164 @@
+.manutentor-container {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    padding: 20px;
+    margin-top: 60px; 
+    width: 100%;
+    margin: 20px auto;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .manutentor-container h1 {
+    margin-top: 50px;
+  }
+  
+  /* Título */
+  h1 {
+    font-size: 2rem;
+    color: #090A0C;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  /* Estilo do conteúdo da lista de manutentor */
+  .manutentor-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+  }
+  
+  .manutentor-item {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); 
+    background-color: #FFFFFF;
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    gap: 10px; 
+  }
+  
+  .manutentor-item:hover {
+    background-color: #F4F6F4;
+    transform: translateY(-4px);
+  }
+  
+  .manutentor-item span {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    word-wrap: break-word; 
+  }
+  
+  .edit {
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 8px;
+    color: black;
+  } 
+  
+  .delete {
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 8px;
+    color: black;
+  }
+  
+  .edit:hover {
+    color: #48b461;
+    transform: scale(1.1);
+  }
+  
+  .delete:hover {
+    color: #d9534f;
+    transform: scale(1.1);
+  }
+  
+  /* Botões de ação */
+  
+  .btn-adicionar {
+    background-color: #2c4375; 
+    color: #ffffff; 
+    font-size: 1.6rem; 
+    padding: 12px 20px;
+    border-radius: 8px; 
+    border: none; 
+    cursor: pointer; 
+    transition: all 0.3s ease; 
+    display: flex;
+  }
+  
+  .btn-adicionar:hover {
+    background-color: #3d5b9b; 
+    transform: scale(1.02); 
+  }
+  
+  .btn.edit, .btn.delete {
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+  
+  /* Mensagem de 'sem resultados' */
+  .no-results {
+    font-size: 18px;
+    color: #888;
+    font-style: italic;
+    margin-top: 20px;
+  }
+  
+  /* Estilos específicos para o header e footer */
+  header {
+    position: relative;
+    z-index: 10;
+  }
+  
+  footer {
+    position: relative;
+    z-index: 10;
+  }
+  
+  /* Pesquisa */
+  .search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .search input {
+    font-size: 1rem;
+    padding: 8px;
+    border: 1px solid #CBD5E0;
+    border-radius: 6px;
+    outline: none;
+    width: 250px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .search input:focus {
+    border-color: #3182CE;
+  }
+  
+  .search .procurar {
+    background-color: #63B3ED;
+    color: #FFFFFF;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+  
+  .search .procurar:hover {
+    background-color: #3182CE;
+    transform: scale(1.1);
+  }
+  

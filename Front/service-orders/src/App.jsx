@@ -4,6 +4,7 @@ import Login from "./components/login/login.jsx";
 import SignUp from "./components/signup/signup.jsx";
 import Home from "./components/home/home.jsx";
 import Historico from "./components/historicos/historicos.jsx";
+import Manutentores from "./components/manutentores/manutentores.jsx";
 
 const App = ()=>{
   return(
@@ -14,6 +15,7 @@ const App = ()=>{
       <Route path="/login" element={<Login />}/>
       <Route path="/home" element={<Home />}/>
       <Route path="/historicos" element={<Historico />}/>
+      <Route path="/manutentores" element={<Manutentores />}/>
     </Routes>
   </Router>
   )

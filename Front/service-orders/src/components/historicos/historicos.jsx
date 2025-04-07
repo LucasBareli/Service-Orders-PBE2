@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./historicos.css";
-//import { FaEdit, FaTrash, FaPlus, FaSearch } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaPlus, FaSearch } from 'react-icons/fa';
 import ModalHistorico from "../modalHistorico/modalHistorico";
 
 export default function Historico() {
@@ -28,13 +28,13 @@ export default function Historico() {
     fetchData();
   }, [token]);
 
-  const atualizar = async (historicosAtualizados) => {
+  const atualizar = async (historicoAtualizados) => {
     try {
       await axios.put(`http://127.0.0.1:8000/api/historico/${historicoAtualizados.id}`,
         {
-          ordem : historicosAtualizados.ordem,
-          data_encerramento : historicosAtualizados.data_encerramento,
-          descricao_manutencao : historicosAtualizados.descricao_manutencao,
+          ordem : historicoAtualizados.ordem,
+          data_encerramento : historicoAtualizados.data_encerramento,
+          descricao_manutencao : historicoAtualizados.descricao_manutencao,
         },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -99,7 +99,7 @@ export default function Historico() {
             sethistoricoSelecionado(null);
           }}
         >
-          {/* <FaPlus /> */}
+          <FaPlus />
         </button>
         <input
           type="text"
@@ -107,7 +107,7 @@ export default function Historico() {
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
         />
-        {/* <FaSearch /> */}
+        <FaSearch />
       <div className="historico-list">
         <div className="table-header">
             <div className="col-header">Ordem</div>
@@ -127,18 +127,18 @@ export default function Historico() {
                   sethistoricoSelecionado(historico);
                 }}
               >
-                {/* <FaEdit /> */}
+              <FaEdit />
               </button>
               <button
                 className="btn delete"
                 onClick={() => apagar(historico.id)}
               >
-              {/*  <FaTrash /> */}
+              <FaTrash /> 
               </button>
             </div>
           ))
         ) : (
-          <p>Nenhuma historico encontrada.</p>
+          <p>Nenhum historico encontrada.</p>
         )}
       </div>
       {modalOpen && (

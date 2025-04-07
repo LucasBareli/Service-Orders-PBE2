@@ -47,5 +47,5 @@ class OrdemServico(models.Model):
 
 class Historico(models.Model):
     ordem = models.ForeignKey('OrdemServico', on_delete=models.SET_NULL, null=True, blank=True)
-    data_encerramento = models.DateTimeField(auto_now_add=True)
+    data_encerramento = models.DateTimeField()
     descricao_manutencao = models.TextField()
