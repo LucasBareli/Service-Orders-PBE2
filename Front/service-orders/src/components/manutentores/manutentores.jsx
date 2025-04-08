@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./manutentores.css";
 import { FaEdit, FaTrash, FaPlus, FaSearch } from 'react-icons/fa';
-import modalManutentores from "../modalManutentor/modalManutentor";
+import ModalManutentores from "../modalManutentor/modalManutentor";
 
 export default function Manutentores() {
   const [dados, setDados] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [manutentoresSelecionado, setmanutentoresSelecionado] = useState(null);
+  const [manutentoresSelecionados, setManutentoresSelecionados] = useState(null);
   const [busca, setBusca] = useState("");
   const token = localStorage.getItem("token");
 
@@ -30,26 +30,18 @@ export default function Manutentores() {
 
   const atualizar = async (manutentorAtualizado) => {
     try {
-      await axios.put(`http://127.0.0.1:8000/api/manutentores/${manutentorAtualizado.id}`,
-        {
-          nome : manutentorAtualizado.nome,
-          area : manutentorAtualizado.data_encerramento,
-          ni : manutentorAtualizado.ni,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+      await axios.put(`http://127.0.0.1:8000/api/manutentores/${manutentorAtualizado.id}`, 
+        manutentorAtualizado,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-      setDados(
-        dados.map((manutentores) =>
-          manutentores.id === manutentorAtualizado.id
-            ? manutentorAtualizado
-            : manutentores
+      setDados((prevDados) =>
+        prevDados.map((manutentor) =>
+          manutentor.id === manutentorAtualizado.id ? manutentorAtualizado : manutentor
         )
       );
       setModalOpen(false);
     } catch (error) {
-      console.error("Erro ao atualizar manutentor:", error);
+      console.error("Erro ao atualizar o manutentor:", error);
     }
   };
 
@@ -59,7 +51,7 @@ export default function Manutentores() {
         await axios.delete(`http://127.0.0.1:8000/api/manutentores/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setDados(dados.filter((manutentores) => manutentores.id !== id));
+        setDados(dados.filter((manutentor) => manutentor.id !== id));
       } catch (error) {
         console.error("Erro ao apagar manutentor:", error);
       }
@@ -70,9 +62,9 @@ export default function Manutentores() {
     try {
       const response = await axios.post("http://127.0.0.1:8000/api/manutentores",
         {
-            nome : novoManutentor.nome,
-            area : novoManutentor.area,
-            ni : novoManutentor.ni,
+          nome: novoManutentor.nome,
+          area: novoManutentor.area,
+          ni: novoManutentor.ni,
         },
         {
           headers: { Authorization: `Bearer ${token}` }, 
@@ -85,8 +77,8 @@ export default function Manutentores() {
     }
   };
 
-  const manutentoresFiltrados = dados.filter((manutentor) =>
-    manutentor.manutentores.toLowerCase().includes(busca.toLowerCase())
+  const manutentoresFiltradas = dados.filter((manutentor) =>
+    manutentor.nome.toLowerCase().includes(busca.toLowerCase())
   );
 
   return (
@@ -96,7 +88,7 @@ export default function Manutentores() {
           className="btn-adicionar"
           onClick={() => {
             setModalOpen(true);
-            setmanutentoresSelecionado(null);
+            setManutentoresSelecionados(null);
           }}
         >
           <FaPlus />
@@ -111,29 +103,31 @@ export default function Manutentores() {
       <div className="manutentor-list">
         <div className="table-header">
             <div className="col-header">Nome</div>
-            <div className="col-header">Area</div>
+            <div className="col-header">Área</div>
             <div className="col-header">NI</div>
+            <div className="col-header">Editar</div>
+            <div className="col-header">Apagar</div>
           </div>
-        {manutentoresFiltrados.length ? (
-          manutentoresFiltrados.map((manutentores) => (
-            <div className="manutentor-item" key={manutentores.id}>
-                <span>{manutentores.ordem}</span>
-                <span>{manutentores.data_encerramento}</span>
-                <span>{manutentores.descricao_manutencao}</span>
+        {manutentoresFiltradas.length ? (
+          manutentoresFiltradas.map((manutentor) => (
+            <div className="manutentor-item" key={manutentor.id}>
+              <span>{manutentor.nome}</span>
+              <span>{manutentor.area}</span>
+              <span>{manutentor.ni}</span>
               <button
                 className="btn edit"
                 onClick={() => {
                   setModalOpen(true);
-                  setmanutentoresSelecionado(manutentores);
+                  setManutentoresSelecionados(manutentor);
                 }}
               >
-              <FaEdit />
+                <FaEdit />
               </button>
               <button
                 className="btn delete"
-                onClick={() => apagar(manutentores.id)}
+                onClick={() => apagar(manutentor.id)}
               >
-              <FaTrash /> 
+                <FaTrash />
               </button>
             </div>
           ))
@@ -142,10 +136,10 @@ export default function Manutentores() {
         )}
       </div>
       {modalOpen && (
-        <modalManutentores
+        <ModalManutentores
           isOpen={modalOpen}
           onClose={() => setModalOpen(false)}
-          manutentoresSelecionado={manutentoresSelecionado}
+          manutentoresSelecionados={manutentoresSelecionados}
           criar={criar}
           atualizar={atualizar}
         />

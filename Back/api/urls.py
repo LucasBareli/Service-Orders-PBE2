@@ -1,5 +1,4 @@
 from django.urls import path
-from . import views
 from .views import *
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -18,9 +17,9 @@ urlpatterns = [
     path('patrimonios/<int:pk>', PatrimoniosAPIView.as_view(), name='patrimonios'),
     path('ambientes', AmbienteView.as_view(), name='ambientes'),
     path('ambientes/<int:pk>', AmbientesAPIView.as_view(), name='ambientes'),
-    path('manutentores', ManutentoresAPIView.as_view(), name='manutentores'),
+    path('manutentores', ManutentoresView.as_view(), name='manutentores'),
     path('manutentores/<int:pk>', ManutentoresAPIView.as_view(), name='manutentores'),
-    path('ordemservico', OrdemServicoAPIView.as_view(), name='ordem serviço'),
+    path('ordemservico', OrdemServicoView.as_view(), name='ordem serviço'),
     path('ordemservico/<int:pk>', OrdemServicoAPIView.as_view(), name='ordem serviço'),
     path('historico', HistoricoView.as_view(), name='historico'),
     path('historico/<int:pk>', HistoricoAPIView.as_view(), name='historico')

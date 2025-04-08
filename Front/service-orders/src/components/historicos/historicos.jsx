@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./historicos.css";
+import './historicos.css'
 import { FaEdit, FaTrash, FaPlus, FaSearch } from 'react-icons/fa';
-import ModalHistorico from "../modalHistorico/modalHistorico";
 
 export default function Historico() {
   const [dados, setDados] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [historicoSelecionado, sethistoricoSelecionado] = useState(null);
+  const [historicoSelecionados, setHistoricosSelecionados] = useState(null);
   const [busca, setBusca] = useState("");
   const token = localStorage.getItem("token");
 
@@ -28,28 +27,20 @@ export default function Historico() {
     fetchData();
   }, [token]);
 
-  const atualizar = async (historicoAtualizados) => {
+  const atualizar = async (historicoAtualizado) => {
     try {
-      await axios.put(`http://127.0.0.1:8000/api/historico/${historicoAtualizados.id}`,
-        {
-          ordem : historicoAtualizados.ordem,
-          data_encerramento : historicoAtualizados.data_encerramento,
-          descricao_manutencao : historicoAtualizados.descricao_manutencao,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+      await axios.put(`http://127.0.0.1:8000/api/historico/${historicoAtualizado.id}`, 
+        historicoAtualizado,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-      setDados(
-        dados.map((historicos) =>
-          historicos.id === historicosAtualizados.id
-            ? historicosAtualizados
-            : historicos
+      setDados((prevDados) =>
+        prevDados.map((historico) =>
+          historico.id === historicoAtualizado.id ? historicoAtualizado : historico
         )
       );
       setModalOpen(false);
     } catch (error) {
-      console.error("Erro ao atualizar historico:", error);
+      console.error("Erro ao atualizar o historico:", error);
     }
   };
 
@@ -59,7 +50,7 @@ export default function Historico() {
         await axios.delete(`http://127.0.0.1:8000/api/historico/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setDados(dados.filter((historicos) => historicos.id !== id));
+        setDados(dados.filter((historico) => historico.id !== id));
       } catch (error) {
         console.error("Erro ao apagar historico:", error);
       }
@@ -70,9 +61,9 @@ export default function Historico() {
     try {
       const response = await axios.post("http://127.0.0.1:8000/api/historico",
         {
-            ordem : novoHistorico.ordem,
-            data_encerramento : novoHistorico.data_encerramento,
-            descricao_manutencao : novoHistorico.descricao_manutencao,
+          nome: novoHistorico.nome,
+          area: novoHistorico.area,
+          ni: novoHistorico.ni,
         },
         {
           headers: { Authorization: `Bearer ${token}` }, 
@@ -81,22 +72,22 @@ export default function Historico() {
       setDados([...dados, response.data]);
       setModalOpen(false);
     } catch (error) {
-      console.error("Erro ao criar histórico:", error);
+      console.error("Erro ao criar historico:", error);
     }
   };
 
-  const historicosFiltrados = dados.filter((historicos) =>
-    historicos.historico.toLowerCase().includes(busca.toLowerCase())
+  const historicoFiltradas = dados.filter((historico) =>
+    historico.ordem.toLowerCase().includes(busca.toLowerCase())
   );
 
   return (
     <div className="historico-container">
-      <h1>Gestão de históricos</h1>
+      <h1>Gestão de historico</h1>
         <button
           className="btn-adicionar"
           onClick={() => {
             setModalOpen(true);
-            sethistoricoSelecionado(null);
+            setHistoricosSelecionados(null);
           }}
         >
           <FaPlus />
@@ -111,41 +102,43 @@ export default function Historico() {
       <div className="historico-list">
         <div className="table-header">
             <div className="col-header">Ordem</div>
-            <div className="col-header">Data encerramento</div>
-            <div className="col-header">Descrição manutenção</div>
+            <div className="col-header">Data Encerramento</div>
+            <div className="col-header">Descrição Manutenção</div>
+            <div className="col-header">Editar</div>
+            <div className="col-header">Apagar</div>
           </div>
-        {historicosFiltrados.length ? (
-          historicosFiltrados.map((historico) => (
+        {historicoFiltradas.length ? (
+          historicoFiltradas.map((historico) => (
             <div className="historico-item" key={historico.id}>
-                <span>{historico.ordem}</span>
-                <span>{historico.data_encerramento}</span>
-                <span>{historico.descricao_manutencao}</span>
+              <span>{historico.nome}</span>
+              <span>{historico.area}</span>
+              <span>{historico.ni}</span>
               <button
                 className="btn edit"
                 onClick={() => {
                   setModalOpen(true);
-                  sethistoricoSelecionado(historico);
+                  setHistoricosSelecionados(historico);
                 }}
               >
-              <FaEdit />
+                <FaEdit />
               </button>
               <button
                 className="btn delete"
                 onClick={() => apagar(historico.id)}
               >
-              <FaTrash /> 
+                <FaTrash />
               </button>
             </div>
           ))
         ) : (
-          <p>Nenhum historico encontrada.</p>
+          <p>Nenhum historico encontrado.</p>
         )}
       </div>
       {modalOpen && (
-        <ModalHistorico
+        <Modalhistorico
           isOpen={modalOpen}
           onClose={() => setModalOpen(false)}
-          historicoSelecionado={historicoSelecionado}
+          historicoSelecionados={historicoSelecionados}
           criar={criar}
           atualizar={atualizar}
         />

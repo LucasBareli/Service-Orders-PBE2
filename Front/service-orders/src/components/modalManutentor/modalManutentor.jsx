@@ -1,50 +1,51 @@
 import React, { useEffect, useState } from "react";
 import "./modalManutentor.css";
 
-const modalManutentores = ({
+const ModalManutentores = ({
   isOpen,
   onClose,
-  manutentorSelecionado,
+  manutentoresSelecionados,
   criar,
   atualizar,
 }) => {
   if (!isOpen) return null;
 
-  console.log("Manutentor Selecionado: ", manutentorSelecionado);
+  console.log("Manutentor Selecionado: ", manutentoresSelecionados);
 
-  const [id, setId] = useState(manutentorSelecionado?.id || "");
-  const [nome, setNome] = useState(manutentorSelecionado?.nome || "");
-  const [area, setArea] = useState(manutentorSelecionado?.area || "");
-  const [ni, setNi] = useState(manutentorSelecionado?.ni || "");
+  const [id, setId] = useState(manutentoresSelecionados?.id || "");
+  const [nome, setNome] = useState(manutentoresSelecionados?.nome || "");
+  const [area, setArea] = useState(manutentoresSelecionados?.area || "");
+  const [ni, setNi] = useState(manutentoresSelecionados?.ni || "");
 
   useEffect(() => {
-    if (manutentorSelecionado) {
-      setId(manutentorSelecionado.id || "");
-      setNome(manutentorSelecionado.nome || "");
-      setArea(manutentorSelecionado.area || "");
-      setNi(manutentorSelecionado.ni || "");
+    if (manutentoresSelecionados) {
+      setId(manutentoresSelecionados.id || "");
+      setNome(manutentoresSelecionados.nome || "");
+      setArea(manutentoresSelecionados.area || "");
+      setNi(manutentoresSelecionados.ni || "");
     } else {
       setId("");
       setNome("");
       setArea("");
       setNi("");
     }
-  }, [manutentorSelecionado]);
+  }, [manutentoresSelecionados]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const novoManutentor = {id, nome, area, ni};
-    if (manutentorSelecionado) {
-      atualizar({ ...manutentorSelecionado, ...novoManutentor });
+    const novoCurso = {id, codigo, curso, tipo, ha, sigla };
+    if (manutentoresSelecionados) {
+      atualizar({ ...manutentoresSelecionados, ...novoCurso });
     } else {
-      criar(novoManutentor);
+      criar(novoCurso);
     }
   };
+
   return (
     <div className="modal-overlay">
       <div className="modal_container">
         <button className="close_button" onClick={onClose}>X</button>
-        <h2>{manutentorSelecionado ? "Editar Manutentors" : "Cadastrar Manutentors"}</h2>
+        <h2>{manutentoresSelecionados ? "Editar manutentores" : "Cadastrar manutentores"}</h2>
         <div className="body_modal">
           <div className="caixa1">
             <form onSubmit={handleSubmit}>
@@ -64,10 +65,10 @@ const modalManutentores = ({
                 className="tipo_modal"
                 value={ni}
                 onChange={(e) => setNi(e.target.value)}
-                placeholder="NI"
+                placeholder="ni"
               />
               <button type="submit">
-                {manutentorSelecionado ? "Atualizar" : "Salvar"}
+                {manutentoresSelecionados ? "Atualizar" : "Salvar"}
               </button>
             </form>
           </div>
@@ -79,4 +80,4 @@ const modalManutentores = ({
   );
 };
 
-export default modalManutentores;
+export default ModalManutentores;

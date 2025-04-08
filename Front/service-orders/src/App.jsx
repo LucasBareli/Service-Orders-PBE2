@@ -5,6 +5,7 @@ import SignUp from "./components/signup/signup.jsx";
 import Home from "./components/home/home.jsx";
 import Historico from "./components/historicos/historicos.jsx";
 import Manutentores from "./components/manutentores/manutentores.jsx";
+import OrdemServico from "./components/ordemServico/ordemServico.jsx";
 
 const App = ()=>{
   return(
@@ -16,6 +17,7 @@ const App = ()=>{
       <Route path="/home" element={<Home />}/>
       <Route path="/historicos" element={<Historico />}/>
       <Route path="/manutentores" element={<Manutentores />}/>
+      <Route path="/ordens-servico" element={<OrdemServico />}/>
     </Routes>
   </Router>
   )
