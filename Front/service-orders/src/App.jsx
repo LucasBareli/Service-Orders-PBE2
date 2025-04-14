@@ -6,6 +6,8 @@ import Home from "./components/home/home.jsx";
 import Historico from "./components/historicos/historicos.jsx";
 import Manutentores from "./components/manutentores/manutentores.jsx";
 import OrdemServico from "./components/ordemServico/ordemServico.jsx";
+import Gestores from "./components/gestores/gestores.jsx";
+import Patrimonio from "./components/patrimonios/patrimonios.jsx";
 
 const App = ()=>{
   return(
@@ -18,6 +20,8 @@ const App = ()=>{
       <Route path="/historicos" element={<Historico />}/>
       <Route path="/manutentores" element={<Manutentores />}/>
       <Route path="/ordens-servico" element={<OrdemServico />}/>
+      <Route path="/gestores" element={<Gestores />}/>
+      <Route path="/patrimonios" element={<Patrimonio />}></Route>
     </Routes>
   </Router>
   )

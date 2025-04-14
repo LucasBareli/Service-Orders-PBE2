@@ -33,11 +33,11 @@ const ModalManutentores = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const novoCurso = {id, codigo, curso, tipo, ha, sigla };
+    const novoManutentor = {id, nome, area, ni};
     if (manutentoresSelecionados) {
-      atualizar({ ...manutentoresSelecionados, ...novoCurso });
+      atualizar({ ...manutentoresSelecionados, ...novoManutentor });
     } else {
-      criar(novoCurso);
+      criar(novoManutentor);
     }
   };
 

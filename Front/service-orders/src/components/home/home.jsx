@@ -26,6 +26,10 @@ const Home = () => {
           <h2>Históricos</h2>
           <a href="/historicos" className="topic-link">Acessar</a>
         </div>
+        <div className="topic-card">
+          <h2>Gestores</h2>
+          <a href="/gestores" className="topic-link">Acessar</a>
+        </div>
       </div>
     </div>
   );

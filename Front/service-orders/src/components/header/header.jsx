@@ -12,6 +12,7 @@ const Header = () => {
         <a href="/patrimonios">Patrimonios</a>
         <a href="/manutentores">Manutentores</a>
         <a href="/historicos">Historicos</a>
+        <a href="/gestores">Gestores</a>
       </nav>
     </header>
   );

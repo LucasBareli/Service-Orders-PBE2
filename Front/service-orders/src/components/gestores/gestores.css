@@ -1,4 +1,4 @@
-.patrimonio-container {
+.gestor-container {
     font-family: 'Roboto', sans-serif;
     text-align: center;
     padding: 20px;
@@ -10,7 +10,7 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
   
-  .patrimonio-container h1 {
+  .gestor-container h1 {
     margin-top: 50px;
   }
   
@@ -22,14 +22,14 @@
     font-weight: bold;
   }
   
-  /* Estilo do conteúdo da lista de patrimonio */
-  .patrimonio-list {
+  /* Estilo do conteúdo da lista de gestor */
+  .gestor-list {
     display: flex;
     flex-direction: column;
     margin-top: 30px;
   }
   
-  .patrimonio-item {
+  .gestor-item {
     display: grid;
     grid-template-columns: repeat(7, 1fr); 
     background-color: #FFFFFF;
@@ -57,12 +57,12 @@
     padding: 10px;
   }
   
-  .patrimonio-item:hover {
+  .gestor-item:hover {
     background-color: #F4F6F4;
     transform: translateY(-4px);
   }
   
-  .patrimonio-item span {
+  .gestor-item span {
     font-size: 18px;
     font-weight: 500;
     color: #333;

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./patrimonios.css";
+import "./gestores.css";
 import { FaEdit, FaTrash, FaPlus, FaSearch } from 'react-icons/fa';
-import ModalPatrimonio from "../modalpatrimonio/modalpatrimonio";
+import ModalGestores from "../modalGestores/modalGestores";
 
-export default function Patrimonio() {
+export default function Gestores() {
   const [dados, setDados] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [patrimonioSelecionados, setPatrimoniosSelecionados] = useState(null);
+  const [gestoresSelecionados, setgestoresSelecionados] = useState(null);
   const [busca, setBusca] = useState("");
   const token = localStorage.getItem("token");
 
@@ -16,7 +16,7 @@ export default function Patrimonio() {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/patrimonios", {
+        const response = await axios.get("http://127.0.0.1:8000/api/gestores", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setDados(response.data);
@@ -28,43 +28,44 @@ export default function Patrimonio() {
     fetchData();
   }, [token]);
 
-  const atualizar = async (patrimonioAtualizado) => {
+  const atualizar = async (gestorAtualizado) => {
     try {
-      await axios.put(`http://127.0.0.1:8000/api/patrimonios/${patrimonioAtualizado.id}`, 
-        patrimonioAtualizado,
+      await axios.put(`http://127.0.0.1:8000/api/gestores/${gestorAtualizado.id}`, 
+        gestorAtualizado,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setDados((prevDados) =>
-        prevDados.map((patrimonio) =>
-          patrimonio.id === patrimonioAtualizado.id ? patrimonioAtualizado : patrimonio
+        prevDados.map((gestor) =>
+          gestor.id === gestorAtualizado.id ? gestorAtualizado : gestor
         )
       );
       setModalOpen(false);
     } catch (error) {
-      console.error("Erro ao atualizar o patrimonio:", error);
+      console.error("Erro ao atualizar o gestor:", error);
     }
   };
 
   const apagar = async (id) => {
     if (window.confirm("Tem certeza que deseja apagar?")) {
       try {
-        await axios.delete(`http://127.0.0.1:8000/api/patrimonios/${id}`, {
+        await axios.delete(`http://127.0.0.1:8000/api/gestores/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setDados(dados.filter((patrimonio) => patrimonio.id !== id));
+        setDados(dados.filter((gestor) => gestor.id !== id));
       } catch (error) {
-        console.error("Erro ao apagar patrimonio:", error);
+        console.error("Erro ao apagar gestor:", error);
       }
     }
   };
 
-  const criar = async (novoPatrimonio) => {
+  const criar = async (novoGestor) => {
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/patrimonios",
+      const response = await axios.post("http://127.0.0.1:8000/api/gestores",
         {
-          localizacao: novoPatrimonio.localizacao,
-          ni: novoPatrimonio.ni,
-          descricao: novoPatrimonio.descricao,
+          ni: novoGestor.ni,
+          nome: novoGestor.nome,
+          area: novoGestor.area,
+          cargo: novoGestor.cargo
         },
         {
           headers: { Authorization: `Bearer ${token}` }, 
@@ -73,73 +74,75 @@ export default function Patrimonio() {
       setDados([...dados, response.data]);
       setModalOpen(false);
     } catch (error) {
-      console.error("Erro ao criar patrimonio:", error);
+      console.error("Erro ao criar gestor:", error);
     }
   };
 
-  const patrimonioFiltrado = dados.filter((patrimonio) =>
-    patrimonio.localizacao.toString().toLowerCase().includes(busca.toLowerCase())
-  );  
+  const gestoresFiltrados = dados.filter((gestor) =>
+    gestor.nome.toLowerCase().includes(busca.toLowerCase())
+  );
 
   return (
-    <div className="patrimonio-container">
-      <h1>Gestão de patrimonio</h1>
+    <div className="gestor-container">
+      <h1>Gestão de gestores</h1>
         <button
           className="btn-adicionar"
           onClick={() => {
             setModalOpen(true);
-            setPatrimoniosSelecionados(null);
+            setgestoresSelecionados(null);
           }}
         >
           <FaPlus />
         </button>
         <input
           type="text"
-          placeholder="Buscar patrimonio"
+          placeholder="Buscar gestor"
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
         />
         <FaSearch />
-      <div className="patrimonio-list">
+      <div className="gestor-list">
         <div className="table-header">
-            <div className="col-header">Localização</div>
             <div className="col-header">NI</div>
-            <div className="col-header">Descrição</div>
+            <div className="col-header">Nome</div>
+            <div className="col-header">Área</div>
+            <div className="col-header">Cargo</div>
             <div className="col-header">Editar</div>
             <div className="col-header">Apagar</div>
           </div>
-        {patrimonioFiltrado.length ? (
-          patrimonioFiltrado.map((patrimonio) => (
-            <div className="patrimonio-item" key={patrimonio.id}>
-              <span>{patrimonio.localizacao}</span>
-              <span>{patrimonio.ni}</span>
-              <span>{patrimonio.descricao}</span>
+        {gestoresFiltrados.length ? (
+          gestoresFiltrados.map((gestor) => (
+            <div className="gestor-item" key={gestor.id}>
+                <span>{gestor.ni}</span>
+                <span>{gestor.nome}</span>
+                <span>{gestor.area}</span>
+                <span>{gestor.cargo}</span>
               <button
                 className="btn edit"
                 onClick={() => {
                   setModalOpen(true);
-                  setPatrimoniosSelecionados(patrimonio);
+                  setgestoresSelecionados(gestor);
                 }}
               >
                 <FaEdit />
               </button>
               <button
                 className="btn delete"
-                onClick={() => apagar(patrimonio.id)}
+                onClick={() => apagar(gestor.id)}
               >
                 <FaTrash />
               </button>
             </div>
           ))
         ) : (
-          <p>Nenhum patrimonio encontrado.</p>
+          <p>Nenhum gestor encontrado.</p>
         )}
       </div>
       {modalOpen && (
-        <ModalPatrimonio
+        <ModalGestores
           isOpen={modalOpen}
           onClose={() => setModalOpen(false)}
-          patrimonioSelecionados={patrimonioSelecionados}
+          gestoresSelecionados={gestoresSelecionados}
           criar={criar}
           atualizar={atualizar}
         />

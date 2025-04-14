@@ -42,6 +42,9 @@ class PatrimoniosAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Patrimonios.objects.all()
     serializer_class = PatrimoniosSerializer
     permission_classes = [IsAuthenticated]
+    
+    Patrimonios.objects.all().delete()
+
 
 class AmbienteView(ListCreateAPIView):
     queryset = Ambientes.objects.all()
