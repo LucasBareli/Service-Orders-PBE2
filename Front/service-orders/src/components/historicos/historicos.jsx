@@ -14,6 +14,7 @@ export default function Historico() {
 
   useEffect(() => {
     if (!token) return;
+    console.log("Ordens:", ordens)
 
     const fetchData = async () => {
       try {
@@ -117,10 +118,11 @@ export default function Historico() {
           <div className="col-header">Editar</div>
           <div className="col-header">Apagar</div>
         </div>
+
         {historicoFiltradas.length ? (
           historicoFiltradas.map((historico) => (
             <div className="historico-item" key={historico.id}>
-              <span>{historico.ordem ? historico.ordem.nome : "N/A"}</span>
+              <span>{ordens ? ordens.descricao : "N/A"}</span>
               <span>{new Date(historico.data_encerramento).toLocaleDateString()}</span>
               <span>{historico.descricao_manutencao}</span>
               <button
@@ -153,6 +155,7 @@ export default function Historico() {
           criar={criar}
           atualizar={atualizar}
           ordens={ordens} 
+          setOrdens = {setOrdens}
         />
       )}
     </div>
