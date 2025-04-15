@@ -30,6 +30,14 @@ const Home = () => {
           <h2>Gestores</h2>
           <a href="/gestores" className="topic-link">Acessar</a>
         </div>
+        <div className="topic-card">
+          <h2>Responsaveis</h2>
+          <a href="/responsaveis" className="topic-link">Acessar</a>
+        </div>
+        <div className="topic-card">
+          <h2>Ambientes</h2>
+          <a href="/ambientes" className="topic-link">Acessar</a>
+        </div>
       </div>
     </div>
   );

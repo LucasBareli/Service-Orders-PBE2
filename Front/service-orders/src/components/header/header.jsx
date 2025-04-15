@@ -1,5 +1,7 @@
 import React from 'react';
 import './header.css'; 
+import Logout from '../Logout/logout';
+
 
 const Header = () => {
   return (
@@ -13,6 +15,8 @@ const Header = () => {
         <a href="/manutentores">Manutentores</a>
         <a href="/historicos">Historicos</a>
         <a href="/gestores">Gestores</a>
+        <a href="/ambientes">Ambientes</a>
+        <Logout/>
       </nav>
     </header>
   );

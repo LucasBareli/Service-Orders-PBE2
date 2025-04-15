@@ -12,7 +12,7 @@
   justify-content: space-between;
   align-items: center;
   transition: background-color 0.3s ease;
-  box-sizing: border-box; /* Garante que o padding não sobreponha o conteúdo */
+  box-sizing: border-box; 
 }
 
 .header:hover {
@@ -31,7 +31,7 @@
 .nav {
   display: flex;
   gap: 1.5rem;
-  justify-content: flex-start;  /* Alinha os links da esquerda */
+  justify-content: flex-start;  
   align-items: center;
 }
 
@@ -49,13 +49,13 @@
   text-decoration: underline;
 }
 
-/* Responsividade para evitar o corte do último link */
+
 @media screen and (max-width: 767px) {
   .header {
     flex-direction: column;
     align-items: flex-start;
     padding: 1.5rem 1rem;
-    gap: 1rem;  /* Adiciona espaçamento entre logo e nav */
+    gap: 1rem;  
   }
 
   .nav {
@@ -73,6 +73,7 @@
     padding: 0.5rem 1rem;
     width: 100%;
     text-align: left;
-    box-sizing: border-box;  /* Garante que o conteúdo dos links não ultrapasse a largura */
+    box-sizing: border-box; 
   }
 }
+

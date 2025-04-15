@@ -8,30 +8,27 @@ const ModalHistorico = ({
   historicoSelecionado,
   criar,
   atualizar,
-  ordens,
-  setOrdens
 }) => {
   if (!isOpen) return null;
+
   const [id, setId] = useState(historicoSelecionado?.id || "");
-  // const [ordem, setOrdem] = useState(historicoSelecionado?.ordem || "");
-  const [data_encerramento, setData_encerramento] = useState(
-    historicoSelecionado?.data_encerramento || ""
-  );
-  const [descricao_manutencao, setDescricao_manutencao] = useState(
-    historicoSelecionado?.descricao_manutencao || ""
-  );
-  const [dadosOrdem, setDadosOrdens] = useState([])
-  const token = localStorage.getItem("token")
+  const [data_encerramento, setData_encerramento] = useState(historicoSelecionado?.data_encerramento || "");
+  const [descricao_manutencao, setDescricao_manutencao] = useState(historicoSelecionado?.descricao_manutencao || "");
+  const [ordemSelecionada, setOrdemSelecionada] = useState(historicoSelecionado?.ordem || "");
+  const [dadosOrdem, setDadosOrdens] = useState([]);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     if (historicoSelecionado) {
       setId(historicoSelecionado.id || "");
       setData_encerramento(historicoSelecionado.data_encerramento || "");
       setDescricao_manutencao(historicoSelecionado.descricao_manutencao || "");
+      setOrdemSelecionada(historicoSelecionado.ordem || "");
     } else {
       setId("");
       setData_encerramento("");
       setDescricao_manutencao("");
+      setOrdemSelecionada("");
     }
 
     const carregarOrdens = async () => {
@@ -40,23 +37,23 @@ const ModalHistorico = ({
           headers: { Authorization: `Bearer ${token}` },
         });
         setDadosOrdens(response.data);
-
       } catch (error) {
         console.error("Erro ao buscar ordens de serviço:", error);
       }
     };
 
-    carregarOrdens()
+    carregarOrdens();
   }, [historicoSelecionado]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const novoHistorico = {
       id,
-      ordem: ordens,
+      ordem: ordemSelecionada,
       data_encerramento,
       descricao_manutencao,
     };
+
     if (historicoSelecionado) {
       atualizar({ ...historicoSelecionado, ...novoHistorico });
     } else {
@@ -70,18 +67,14 @@ const ModalHistorico = ({
         <button className="close_button" onClick={onClose}>
           X
         </button>
-        <h2>
-          {historicoSelecionado
-            ? "Editar Histórico"
-            : "Cadastrar Histórico"}
-        </h2>
+        <h2>{historicoSelecionado ? "Editar Histórico" : "Cadastrar Histórico"}</h2>
         <div className="body_modal">
           <div className="caixa1">
             <form onSubmit={handleSubmit}>
               <select
                 className="codigo_modal"
-                value={ordens}
-                onChange={(e) => setOrdens(e.target.value)}
+                value={ordemSelecionada}
+                onChange={(e) => setOrdemSelecionada(e.target.value)}
               >
                 <option value="">Selecione uma ordem</option>
                 {dadosOrdem.map((ordemItem) => (

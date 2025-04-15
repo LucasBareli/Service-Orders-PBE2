@@ -8,6 +8,8 @@ import Manutentores from "./components/manutentores/manutentores.jsx";
 import OrdemServico from "./components/ordemServico/ordemServico.jsx";
 import Gestores from "./components/gestores/gestores.jsx";
 import Patrimonio from "./components/patrimonios/patrimonios.jsx";
+import Responsaveis from "./components/responsaveis/responsaveis.jsx";
+import Ambientes from "./components/ambientes/ambientes.jsx";
 
 const App = ()=>{
   return(
@@ -21,7 +23,9 @@ const App = ()=>{
       <Route path="/manutentores" element={<Manutentores />}/>
       <Route path="/ordens-servico" element={<OrdemServico />}/>
       <Route path="/gestores" element={<Gestores />}/>
-      <Route path="/patrimonios" element={<Patrimonio />}></Route>
+      <Route path="/patrimonios" element={<Patrimonio />}/>
+      <Route path="/responsaveis" element={<Responsaveis />}/>
+      <Route path="/ambientes" element={<Ambientes />}/>
     </Routes>
   </Router>
   )
